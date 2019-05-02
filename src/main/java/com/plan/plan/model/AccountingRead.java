@@ -1,11 +1,15 @@
 package com.plan.plan.model;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class AccountingRecord {
-
+@Entity
+// 用于标记持久化类,Spring Boot项目加载后会自动根据持久化类建表
+@Table(name = "record")
+public class AccountingRead  implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     //金额 主键
     private double cash;
@@ -18,11 +22,19 @@ public class AccountingRecord {
     //产生时间
     private String createTime;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public double getCash() {
         return cash;
     }
 
-    public void setCash(@RequestParam("cash") double cash) {
+    public void setCash(double cash) {
         this.cash = cash;
     }
 
@@ -30,7 +42,7 @@ public class AccountingRecord {
         return type;
     }
 
-    public void setType(@RequestParam("type") String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -38,7 +50,7 @@ public class AccountingRecord {
         return category;
     }
 
-    public void setCategory(@RequestParam("category") String category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -54,15 +66,7 @@ public class AccountingRecord {
         return createTime;
     }
 
-    public void setCreateTime(@RequestParam("createTime") String createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
