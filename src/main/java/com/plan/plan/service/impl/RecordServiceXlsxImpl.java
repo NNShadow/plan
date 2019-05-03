@@ -1,7 +1,7 @@
 package com.plan.plan.service.impl;
 
 import com.plan.plan.model.AccountingRecord;
-import com.plan.plan.service.RecordService;
+import com.plan.plan.service.RecordServiceXlsx;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RecordServiceImpl implements RecordService {
+//不使用
+public class RecordServiceXlsxImpl implements RecordServiceXlsx {
     public void record(AccountingRecord record){
         File file = new File("./record.xlsx");
         Workbook wb = null;

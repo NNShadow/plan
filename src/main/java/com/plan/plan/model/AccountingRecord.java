@@ -2,10 +2,17 @@ package com.plan.plan.model;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class AccountingRecord {
+@Entity
+// 用于标记持久化类,Spring Boot项目加载后会自动根据持久化类建表
+@Table(name = "record")
+public class AccountingRecord implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     //金额 主键
     private double cash;
