@@ -1,22 +1,19 @@
 package com.plan.plan.control;
 
 import com.plan.plan.model.AccountingRecord;
-import com.plan.plan.service.UserService;
+import com.plan.plan.service.impl.RecordServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class AccountingController {
 //    private static List<AccountingRecord> records = new ArrayList<>();
 
     @Resource
-    private UserService userService;
+    private RecordServiceImpl userService;
 
     //记录数据
     @RequestMapping(value = "/record")
