@@ -20,8 +20,7 @@ public class AccountingController {
 
     //记录数据
     @RequestMapping(value = "/record")
-    public String record(){
-        AccountingRecord user = new AccountingRecord();
+    public String record(AccountingRecord user){
         Date time = new Date();
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
 //        String usertime = simpleDateFormat.format(time);
