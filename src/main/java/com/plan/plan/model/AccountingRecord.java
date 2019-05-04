@@ -24,6 +24,8 @@ public class AccountingRecord implements Serializable {
     private Date modifyTime;
     //产生时间
     private String createTime;
+    //是否显示
+    private int display;
 
     public double getCash() {
         return cash;
@@ -69,7 +71,15 @@ public class AccountingRecord implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public int getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(int display) {
+        this.display = display;
     }
 }

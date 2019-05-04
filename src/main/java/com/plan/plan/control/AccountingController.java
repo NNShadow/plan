@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class AccountingController {
@@ -19,11 +21,28 @@ public class AccountingController {
     @RequestMapping(value = "/record")
     public String record(AccountingRecord user){
         Date time = new Date();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-//        String usertime = simpleDateFormat.format(time);
         user.setModifyTime(time);
+        user.setDisplay(1);
+
+        //验证金额
+        if(!check(String.valueOf(user.getCash()),  "^?\\d+(\\.\\d+)?$")){
+            System.out.println("错误1");
+            return "recordReturn";
+        }
+
+        //验证详细信息
+        if(user.getCategory() == null){
+            System.out.println("错误2");
+            return "recordReturn";
+        }
+        //验证产生时间
+        if(!check(user.getCreateTime(), "^(\\d{4})(-)(\\d{2})(-)(\\d{2})$")){
+            System.out.println("错误3");
+            return "recordReturn";
+        }
+
         userService.save(user);
-        return "保存成功";
+        return "recordReturn";
     }
 
 //    //返回记录
@@ -33,4 +52,9 @@ public class AccountingController {
 //        return recordService.details();
 //    }
 
+    public boolean check(String str, String regEx){
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
+    }
 }
