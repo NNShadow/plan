@@ -7,12 +7,12 @@
 <body>
 <form action="/record" method="post">
     <h4>创建时间：</h4>
-    <input name="createTime" placeholder="发生日期，如2019-01-10" id="createTime">
+    <input name="createTime" placeholder="发生日期，如2019-01-10" id="createTime" onblur="handlerBlur1()">
     <br/>
     <br/>
 
     <h4>收入或支出：</h4>
-    <select name="type" id="type">
+    <select name="type" id="type" >
         <option value="收入">收入</option>
         <option value="支出">支出</option>
     </select>
@@ -20,39 +20,68 @@
     <br/>
 
     <h4>详情：</h4>
-    <input type="text" placeholder="类型" name="category" id="category">
+    <input type="text" placeholder="类型" name="category" id="category" onblur="handlerBlur2()">
     <br/>
     <br/>
 
     <h4>金额：</h4>
-    <input placeholder="金额" name="cash" id="cash">
+    <input placeholder="金额" name="cash" id="cash" onblur="handlerBlur3()">
     <br/>
     <br/>
 
-    <div><button type="submit" onclick="infer()">记一笔</button></div>
+    <div><button type="submit" disabled="disabled" id="submit">记一笔</button></div>
 </form>
 <script>
-    function infer() {
+    var use1 = false;
+    var use2 = false;
+    var use3 = false;
+    function handlerBlur1() {
         var time = document.getElementById("createTime").value;
         var inferTime = /^(\d{4})(-)(\d{2})(-)(\d{2})$/;
+        //验证产生时间
+        if(!inferTime.test(time)){
+            use1 = false;
+            alert("日期输入错误");
+        }else{
+            use1 = true;
+        }
+        if(use1 && use2 && use3){
+            document.getElementById("submit").disabled = false;
+        }else {
+            document.getElementById("submit").disabled = true;
+        }
+    }
+    function handlerBlur2() {
         var cate = document.getElementById("category").value;
         var inferCate = /^(\s+)?$/;
+        //验证详细信息
+        if(inferCate.test(cate)){
+            use2 = false;
+            alert("内容错误");
+        }else {
+            use2 = true;
+        }
+        if(use1 && use2 && use3){
+            document.getElementById("submit").disabled = false;
+        }else {
+            document.getElementById("submit").disabled = true;
+        }
+    }
+    function handlerBlur3() {
         var cash = document.getElementById("cash").value;
         var inferCash = /^(\d+)(\.\d{1,2})?$/;
-
         //验证金额
         if(!inferCash.test(cash))
         {
+            use3 = false;
             alert("金额输入错误");
+        }else {
+            use3 = true;
         }
-
-        //验证详细信息
-        if(inferCate.test(cate)){
-            alert("内容错误");
-        }
-        //验证产生时间
-        if(!inferTime.test(time)){
-            alert("日期输入错误");
+        if(use1 && use2 && use3){
+            document.getElementById("submit").disabled = false;
+        }else {
+            document.getElementById("submit").disabled = true;
         }
     }
 </script>
