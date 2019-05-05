@@ -7,12 +7,12 @@
 <body>
 <form action="/record" method="post">
     <h4>创建时间：</h4>
-    <input name="createTime" placeholder="发生日期，如2019-01-10">
+    <input name="createTime" placeholder="发生日期，如2019-01-10" id="createTime">
     <br/>
     <br/>
 
     <h4>收入或支出：</h4>
-    <select name="type">
+    <select name="type" id="type">
         <option value="收入">收入</option>
         <option value="支出">支出</option>
     </select>
@@ -20,16 +20,41 @@
     <br/>
 
     <h4>详情：</h4>
-    <input type="text" placeholder="类型" name="category">
+    <input type="text" placeholder="类型" name="category" id="category">
     <br/>
     <br/>
 
     <h4>金额：</h4>
-    <input placeholder="金额" name="cash">
+    <input placeholder="金额" name="cash" id="cash">
     <br/>
     <br/>
 
-    <div><button type="submit">记一笔</button></div>
+    <div><button type="submit" onclick="infer()">记一笔</button></div>
 </form>
+<script>
+    function infer() {
+        var time = document.getElementById("createTime").value;
+        var inferTime = /^(\d{4})(-)(\d{2})(-)(\d{2})$/;
+        var cate = document.getElementById("category").value;
+        var inferCate = /^(\s+)?$/;
+        var cash = document.getElementById("cash").value;
+        var inferCash = /^(\d+)(\.\d{1,2})?$/;
+
+        //验证金额
+        if(!inferCash.test(cash))
+        {
+            alert("金额输入错误");
+        }
+
+        //验证详细信息
+        if(inferCate.test(cate)){
+            alert("内容错误");
+        }
+        //验证产生时间
+        if(!inferTime.test(time)){
+            alert("日期输入错误");
+        }
+    }
+</script>
 </body>
 </html>
