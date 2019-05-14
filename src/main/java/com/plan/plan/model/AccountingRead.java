@@ -1,18 +1,9 @@
 package com.plan.plan.model;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.persistence.*;
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
-@Entity
-// 用于标记持久化类,Spring Boot项目加载后会自动根据持久化类建表
-@Table(name = "record")
-public class AccountingRecord implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AccountingRead {
     //主键
     private long id;
     //金额
@@ -22,51 +13,12 @@ public class AccountingRecord implements Serializable {
     //详细信息
     private String category;
     //修改时间
-    private Date modifyTime;
+    private String modifyTime;
     //产生时间
     private String createTime;
     //是否显示
     private int display;
 
-    public double getCash() {
-        return cash;
-    }
-
-    public void setCash(@RequestParam("cash") double cash) {
-        this.cash = cash;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(@RequestParam("type") String type) {
-        this.type = type;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(@RequestParam("category") String category) {
-        this.category = category;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(@RequestParam("createTime") String createTime) {
-        this.createTime = createTime;
-    }
 
     public long getId() {
         return id;
@@ -74,6 +26,46 @@ public class AccountingRecord implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public double getCash() {
+        return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public int getDisplay() {

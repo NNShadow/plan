@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
     @GetMapping("/")
     public String init(){
-        return "record";
+        return "index";
+    }
+    @GetMapping("/startRecord")
+    public String startRecord(){
+        return "recordMessage";
     }
 }
