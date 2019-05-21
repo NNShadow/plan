@@ -14,6 +14,7 @@ import java.util.Optional;
 public class RecordService {
     @Resource
     private RecordRepositoryAuto recordRepositoryAuto;
+    @Resource
     private RecordRepository recordRepository;
     /**
      * save、update、delete方法需要绑定事务. 使用@Transactional进行事务的绑定
