@@ -1,10 +1,16 @@
 package com.plan.plan.control;
 
 import com.plan.plan.model.AccountingRecord;
+import com.plan.plan.repository.service_interface.RecordRepositoryPageAndSort;
 import com.plan.plan.service.RecordService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.java2d.pipe.AAShapePipe;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -17,6 +23,8 @@ public class AccountingController {
 
     @Resource
     private RecordService userService;
+    @Resource
+    private RecordRepositoryPageAndSort recordRepositoryPageAndSort;
 
     //记录数据
     @RequestMapping(value = "/record")
@@ -59,6 +67,33 @@ public class AccountingController {
     @ResponseBody
     public List<AccountingRecord> findAll(){
         return userService.findAll();
+    }
+
+    //排序
+    @RequestMapping(value = "/sort")
+    @ResponseBody
+    public Iterable<AccountingRecord> sortRecord(){
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Iterable<AccountingRecord> recordDatas = recordRepositoryPageAndSort.findAll(sort);
+        return recordDatas;
+    }
+
+    //分页
+    @RequestMapping(value = "/pager")
+    @ResponseBody
+    public List<AccountingRecord> sortPagerArticle(int pageIndex){
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable page = PageRequest.of(pageIndex - 1, 2, sort);
+
+        Page<AccountingRecord> recordDatas = recordRepositoryPageAndSort.findAll(page);
+        System.out.println("查询总页数:" + recordDatas.getTotalPages());
+        System.out.println("查询总记录数:" + recordDatas.getTotalElements());
+        System.out.println("查询当前第几页:" + recordDatas.getNumber() + 1);
+        System.out.println("查询当前页面的记录数:" + recordDatas.getNumberOfElements());
+        // 查询出的结果数据集合
+        List<AccountingRecord> accountingRecords = recordDatas.getContent();
+        System.out.println("查询当前页面的集合:" + accountingRecords);
+        return accountingRecords;
     }
 
 //    正则匹配String

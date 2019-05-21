@@ -33,10 +33,7 @@ public class RecordRepository {
         return accountingRecord;
     }
 
-    /***
-     * 根据id查询数据
-     * @return User对象
-     */
+    //根据id查询数据
     public AccountingRecord findUserById(int id) {
         // 定义SQL语句
         String sql = "select * from record where id=?";
@@ -45,10 +42,7 @@ public class RecordRepository {
         return jdbcTemplate.queryForObject(sql, new Object[] { id }, rowMapper);
     }
 
-    /***
-     * 查询所有数据
-     * @return 包含User对象的List集合
-     */
+    //查询所有数据
     public List<AccountingRecord> findAll() {
         // 定义SQL语句
         String sql = "select * from record";
@@ -57,9 +51,7 @@ public class RecordRepository {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
-    /***
-     * 根据id删除数据
-     */
+    //根据id删除数据
     public void delete(final Integer id) {
         // 定义SQL语句
         String sql = "delete from record where id=?";
@@ -67,7 +59,7 @@ public class RecordRepository {
         jdbcTemplate.update(sql, new Object[] { id });
     }
 
-    /***
+    /**
      * 修改数据
      * 看看例子就好，懒的实现了
      */
