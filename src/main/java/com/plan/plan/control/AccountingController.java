@@ -26,7 +26,7 @@ public class AccountingController {
     private RecordRepositoryPageAndSort recordRepositoryPageAndSort;
 
     //记录数据
-    @RequestMapping(value = "/record")
+    @RequestMapping(value = "/startRecord/record")
     public String record(AccountingRecord user){
         Date time = new Date();
         user.setModifyTime(time);
@@ -41,19 +41,6 @@ public class AccountingController {
     @ResponseBody
     public Iterable<AccountingRecord> getAll(){
         return userService.getAll();
-//        List<AccountingRecord> filter = records.stream().filter(record -> record.getDisplay() == 1)
-//                .collect(Collectors.toList());
-
-//        StringBuffer sb = new StringBuffer();
-//        sb.append("清单：</br>");
-//        for (AccountingRecord item : filter){
-//            sb.append("记录时间：" + item.getModifyTime() + "</br>"
-//                    + "发生时间：" + item.getCreateTime() + "</br>"
-//                    + "收支类型：" + item.getType() + "</br>"
-//                    + "收支详情：" + item.getCategory() + "</br>"
-//                    + "收支金额：" + item.getCash() + "</br></br>");
-//        }
-//        return sb.toString();
     }
 
     @RequestMapping(value = "/searchNormal")
