@@ -46,7 +46,7 @@ public class RecordRepository {
     public List<AccountingRecord> findAll() {
         // 定义SQL语句
         String sql = "select * from record";
-        // 申明结果集的映射rowMapper，将结果集的数据映射成User对象数据
+        // 申明结果集的映射rowMapper，将结果集的数据映射成 AccountingRecord 对象数据
         RowMapper<AccountingRecord> rowMapper = new BeanPropertyRowMapper<>(AccountingRecord.class);
         return jdbcTemplate.query(sql, rowMapper);
     }
