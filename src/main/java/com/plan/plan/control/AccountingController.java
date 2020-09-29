@@ -82,7 +82,12 @@ public class AccountingController {
         return accountingRecords;
     }
 
-//    正则匹配String
+    /**
+     * 正则匹配 String 类型
+     * @param str
+     * @param regEx
+     * @return
+     */
     public boolean check(String str, String regEx){
         Pattern pattern = Pattern.compile(regEx);
         Matcher matcher = pattern.matcher(str);
